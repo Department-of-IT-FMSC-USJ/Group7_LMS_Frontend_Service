@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Exam - Exam Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Poppins','sans-serif']}}}}</script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen text-sm text-gray-700">
+    <header class="flex items-center justify-between px-6 py-4 bg-white border-b border-gray-200 sticky top-0 z-10">
+        <div>
+            <h2 id="exam-title" class="text-base font-semibold"></h2>
+            <span id="exam-info" class="text-gray-500 text-sm"></span>
+        </div>
+        <div class="flex items-center gap-3">
+            <span id="timer" class="text-sm font-semibold text-emerald-700 bg-emerald-50 px-4 py-1.5 rounded-none font-mono tabular-nums"></span>
+            <button id="submit-btn" onclick="submitExam()" class="px-6 py-2.5 bg-emerald-600 text-white rounded-none font-semibold hover:bg-emerald-700 transition">Submit Exam</button>
+        </div>
+    </header>
+    <div id="questions" class="p-6"></div>
+
+    <script src="../shared/api.js"></script>
+    <script src="../shared/helpers.js"></script>
+    <script src="../shared/ui.js"></script>
+    <script src="take-exam.js"></script>
+</body>
+</html>

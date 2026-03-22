@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Analytics - Exam Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Poppins','sans-serif']}}}}</script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen text-sm text-gray-700">
+    <header class="flex items-center justify-between px-6 py-4 bg-white border-b border-gray-200 sticky top-0 z-10">
+        <h2 id="page-title" class="text-base font-semibold"><i class="fa-solid fa-chart-bar mr-1"></i> Exam Analytics</h2>
+        <button onclick="window.location.href='../teacher/dashboard.html'" class="px-4 py-2 text-sm border border-gray-300 rounded-none hover:bg-gray-50 transition">← Back</button>
+    </header>
+    <div id="content" class="p-6"></div>
+
+    <script src="../shared/api.js"></script>
+    <script src="../shared/helpers.js"></script>
+    <script src="../shared/ui.js"></script>
+    <script src="exam-analytics.js"></script>
+</body>
+</html>

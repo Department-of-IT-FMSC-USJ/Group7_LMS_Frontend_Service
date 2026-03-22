@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Extracted Questions - Exam Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Poppins','sans-serif']}}}}</script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen text-sm text-gray-700">
+    <header class="flex items-center justify-between px-6 py-4 bg-white border-b border-gray-200 sticky top-0 z-10">
+        <h2 class="text-base font-semibold">Review Extracted Questions</h2>
+        <div class="flex gap-3">
+            <button onclick="saveQuestions()" class="px-4 py-2 text-sm bg-emerald-600 text-white rounded-none hover:bg-emerald-700 transition">Save as Paper</button>
+            <button onclick="window.location.href='dashboard.html'" class="px-4 py-2 text-sm border border-gray-300 rounded-none hover:bg-gray-50 transition">← Cancel</button>
+        </div>
+    </header>
+    <div class="p-6">
+        <div class="flex gap-3 mb-4">
+            <input type="text" id="set-name" placeholder="Paper Name" required class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-none focus:border-emerald-600 focus:outline-none">
+            <input type="text" id="set-subject" placeholder="Subject (optional)" class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-none focus:border-emerald-600 focus:outline-none">
+        </div>
+        <p class="text-gray-400 text-sm mb-4">Edit the extracted questions below before saving.</p>
+        <div id="questions-list"></div>
+    </div>
+
+    <script src="../shared/api.js"></script>
+    <script src="../shared/helpers.js"></script>
+    <script src="../shared/ui.js"></script>
+    <script src="extract-pdf.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Exam Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Poppins','sans-serif']}}}}</script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen text-sm text-gray-700">
+
+    <nav class="flex gap-1 px-6 py-2 bg-white border-b border-gray-200">
+        <button class="sub-tab px-5 py-2 rounded-none text-sm font-medium bg-emerald-600 text-white" data-target="exams-section">Available Exams</button>
+        <button class="sub-tab px-5 py-2 rounded-none text-sm font-medium text-gray-500 hover:bg-gray-100" data-target="attempts-section">My Attempts</button>
+        <button class="sub-tab px-5 py-2 rounded-none text-sm font-medium text-gray-500 hover:bg-gray-100" data-target="weak-section">Weak Lessons</button>
+    </nav>
+
+    <div id="exams-section" class="p-6">
+        <h3 class="text-sm font-semibold mb-4">Available Exams</h3>
+        <div id="exams-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+
+    <div id="attempts-section" class="p-6 hidden">
+        <h3 class="text-sm font-semibold mb-4">My Attempts</h3>
+        <div id="attempts-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+
+    <div id="weak-section" class="p-6 hidden">
+        <h3 class="text-sm font-semibold mb-4">Weak Lessons Dashboard</h3>
+        <div id="weak-content"></div>
+    </div>
+
+    <script src="../shared/api.js"></script>
+    <script src="../shared/helpers.js"></script>
+    <script src="../shared/ui.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

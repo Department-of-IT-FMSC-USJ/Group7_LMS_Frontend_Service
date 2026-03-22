@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - Exam Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Poppins','sans-serif']}}}}</script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen text-sm text-gray-700">
+
+    <!-- Sub-tabs -->
+    <nav class="flex gap-1 px-6 py-2 bg-white border-b border-gray-200">
+        <button class="sub-tab px-5 py-2 rounded-none text-sm font-medium bg-emerald-600 text-white" data-target="sets-section">Question Bank</button>
+        <button class="sub-tab px-5 py-2 rounded-none text-sm font-medium text-gray-500 hover:bg-gray-100" data-target="exams-section">My Exams</button>
+    </nav>
+
+    <!-- Question Bank -->
+    <div id="sets-section" class="p-6">
+        <div class="flex justify-between items-center mb-5 flex-wrap gap-3">
+            <h3 class="text-sm font-semibold">Question Sets (Papers)</h3>
+            <div class="flex gap-2 flex-wrap">
+                <button onclick="$('#create-paper-modal').removeClass('hidden')" class="px-4 py-2 text-sm border border-emerald-600 text-emerald-700 rounded-none hover:bg-emerald-600 hover:text-white transition">+ Create Paper</button>
+                <button onclick="$('#extract-pdf-modal').removeClass('hidden')" class="px-4 py-2 text-sm bg-emerald-600 text-white rounded-none hover:bg-emerald-700 transition"><i class="fa-solid fa-file-pdf mr-1"></i>Extract from PDF</button>
+                <button onclick="$('#import-json-modal').removeClass('hidden')" class="px-4 py-2 text-sm bg-emerald-600 text-white rounded-none hover:bg-emerald-700 transition">Import JSON</button>
+                <button onclick="$('#import-pdf-modal').removeClass('hidden')" class="px-4 py-2 text-sm bg-emerald-600 text-white rounded-none hover:bg-emerald-700 transition">Import PDF (Direct)</button>
+            </div>
+        </div>
+        <div id="sets-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+
+    <!-- My Exams -->
+    <div id="exams-section" class="p-6 hidden">
+        <div class="flex justify-between items-center mb-5">
+            <h3 class="text-sm font-semibold">My Exams</h3>
+            <button onclick="window.location.href='publish-exam.html'" class="px-4 py-2 text-sm bg-emerald-600 text-white rounded-none hover:bg-emerald-700 transition">+ Publish Exam</button>
+        </div>
+        <div id="exams-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+
+    <!-- Create Paper Modal -->
+    <div id="create-paper-modal" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-none p-7 w-[500px] max-w-[90vw] shadow-xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-sm font-semibold">Create New Paper</h3>
+                <button onclick="$('#create-paper-modal').addClass('hidden')" class="text-2xl text-gray-400 hover:text-gray-600 leading-none">&times;</button>
+            </div>
+            <form id="create-paper-form">
+                <input type="text" id="paper-name" placeholder="Paper Name" required class="w-full px-4 py-3 mb-3 border-2 border-gray-200 rounded-none focus:border-emerald-600 focus:outline-none">
+                <input type="text" id="paper-subject" placeholder="Subject (optional)" class="w-full px-4 py-3 mb-3 border-2 border-gray-200 rounded-none focus:border-emerald-600 focus:outline-none">
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-none font-semibold transition">Create Paper</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Extract PDF Modal -->
+    <div id="extract-pdf-modal" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-none p-7 w-[500px] max-w-[90vw] shadow-xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-sm font-semibold">Extract Questions from PDF</h3>
+                <button onclick="$('#extract-pdf-modal').addClass('hidden')" class="text-2xl text-gray-400 hover:text-gray-600 leading-none">&times;</button>
+            </div>
+            <p class="text-gray-500 text-sm mb-3">Upload a PDF. AI will extract questions. You can edit them before saving.</p>
+            <form id="extract-pdf-form">
+                <input type="file" id="extract-pdf-file" accept=".pdf" required class="w-full px-4 py-3 mb-3 border-2 border-gray-200 rounded-none">
+                <input type="text" id="extract-gemini-key" placeholder="Gemini API Key (optional)" class="w-full px-4 py-3 mb-3 border-2 border-gray-200 rounded-none focus:border-emerald-600 focus:outline-none">
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-none font-semibold transition">Extract Questions</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Import JSON Modal -->
+    <div id="import-json-modal" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-none p-7 w-[500px] max-w-[90vw] shadow-xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-sm font-semibold">Import Questions from JSON</h3>
+                <button onclick="$('#import-json-modal').addClass('hidden')" class="text-2xl text-gray-400 hover:text-gray-600 leading-none">&times;</button>
+            </div>
+            <form id="import-json-form">
+                <input type="text" id="json-set-name" placeholder="Set Name" required class="w-full px-4 py-3 mb-3 border-2 border-gray-200 rounded-none focus:border-emerald-600 focus:outline-none">
+                <textarea id="json-data" placeholder="Paste exam-ai JSON output here..." rows="8" required class="w-full px-4 py-3 mb-3 border-2 border-gray-200 rounded-none focus:border-emerald-600 focus:outline-none"></textarea>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-none font-semibold transition">Import</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Import PDF (Direct) Modal -->
+    <div id="import-pdf-modal" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-none p-7 w-[500px] max-w-[90vw] shadow-xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-sm font-semibold">Import PDF (Direct Save)</h3>
+                <button onclick="$('#import-pdf-modal').addClass('hidden')" class="text-2xl text-gray-400 hover:text-gray-600 leading-none">&times;</button>
+            </div>
+            <form id="import-pdf-form">
+                <input type="text" id="pdf-set-name" placeholder="Set Name" required class="w-full px-4 py-3 mb-3 border-2 border-gray-200 rounded-none focus:border-emerald-600 focus:outline-none">
+                <input type="file" id="pdf-file" accept=".pdf" required class="w-full px-4 py-3 mb-3 border-2 border-gray-200 rounded-none">
+                <input type="text" id="gemini-key" placeholder="Gemini API Key (optional)" class="w-full px-4 py-3 mb-3 border-2 border-gray-200 rounded-none focus:border-emerald-600 focus:outline-none">
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-none font-semibold transition">Upload & Process</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../shared/api.js"></script>
+    <script src="../shared/helpers.js"></script>
+    <script src="../shared/ui.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
