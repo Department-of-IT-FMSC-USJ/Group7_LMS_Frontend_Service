@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - Exam Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Poppins','sans-serif']}}}}</script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen text-sm text-gray-700">
+    <header class="flex items-center justify-between px-6 py-4 bg-white border-b border-gray-200 sticky top-0 z-10">
+        <h2 class="text-base font-semibold"><i class="fa-solid fa-bell mr-1"></i> Notifications</h2>
+        <div class="flex gap-3">
+            <button onclick="markAllRead()" class="px-4 py-2 text-sm bg-emerald-600 text-white rounded-none hover:bg-emerald-700 transition">Mark All Read</button>
+            <button onclick="window.location.href=getDashboardUrl()" class="px-4 py-2 text-sm border border-gray-300 rounded-none hover:bg-gray-50 transition">← Back</button>
+        </div>
+    </header>
+    <div id="notif-list" class="p-6"></div>
+
+    <script src="../shared/api.js"></script>
+    <script src="../shared/helpers.js"></script>
+    <script src="../shared/ui.js"></script>
+    <script src="notifications.js"></script>
+</body>
+</html>
